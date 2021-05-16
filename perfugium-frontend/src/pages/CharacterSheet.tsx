@@ -9,7 +9,7 @@ export class CharacterSheet extends Component<any, any> {
     render() {
         return (
             <>
-                <Navbar/>
+                <Navbar title={ADI_GALLIA.name}/>
                 <div className="container-fluid">
                     <div className="row">
                         {SW2E_TEMPLATE.attributes.map(attr => (
