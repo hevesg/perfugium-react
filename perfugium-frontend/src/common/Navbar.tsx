@@ -1,15 +1,15 @@
-import {Component} from "react";
-import {Modal} from "./Modal";
+import {ModalForm} from "./ModalForm";
+import {ComponentWithModalForm, ComponentWithModalFormProps, ComponentWithodalFormState} from "./ComponentWithModalForm";
 
-interface NavbarProps {
+interface NavbarProps extends ComponentWithModalFormProps {
     title: string;
 }
 
-interface NavbarState {
+interface NavbarState extends ComponentWithodalFormState {
     modalIsOpen: boolean;
 }
 
-export class Navbar extends Component<NavbarProps, NavbarState> {
+export class Navbar extends ComponentWithModalForm<NavbarProps, NavbarState> {
 
     constructor(props: NavbarProps) {
         super(props);
@@ -17,15 +17,8 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
             modalIsOpen: false
         }
     }
-    private openModal(): void {
-        this.setState({modalIsOpen: true})
-    }
 
-    private closeModal(): void {
-        this.setState({modalIsOpen: false})
-    }
-
-    private saveDataFromModal(): void {
+    protected saveDataFromModal(): void {
 
     }
 
@@ -36,10 +29,10 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
                     <button className="btn btn-link navbar-brand" onClick={() => this.openModal()}>{this.props.title}</button>
                 </div>
             </nav>
-            <Modal title="General data" show={this.state.modalIsOpen}
-                   onRequestClose={() => this.closeModal()} onRequestSave={this.saveDataFromModal}>
+            <ModalForm title="General data" show={this.state.modalIsOpen}
+                       onRequestClose={() => this.closeModal()} onSubmit={this.saveDataFromModal}>
                 <p>Body comes here</p>
-            </Modal>
+            </ModalForm>
         </>);
     }
 }

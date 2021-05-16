@@ -1,18 +1,18 @@
-import {Component} from "react";
 import {D6Attribute} from "../interface/D6Character";
-import {Modal} from "./Modal";
+import {ModalForm} from "./ModalForm";
 import {D6PipComponent} from "./D6PipComponent";
+import {ComponentWithModalForm, ComponentWithModalFormProps, ComponentWithodalFormState} from "./ComponentWithModalForm";
 
-interface D6AttributePanelProps {
+interface D6AttributePanelProps extends ComponentWithModalFormProps {
     attribute: D6Attribute;
     label: string;
 }
 
-interface D6AttributeState {
+interface D6AttributeState extends ComponentWithodalFormState {
     modalIsOpen: boolean;
 }
 
-export class D6AttributePanel extends Component<D6AttributePanelProps, D6AttributeState> {
+export class D6AttributePanel extends ComponentWithModalForm<D6AttributePanelProps, D6AttributeState> {
 
     constructor(props: D6AttributePanelProps) {
         super(props);
@@ -21,15 +21,7 @@ export class D6AttributePanel extends Component<D6AttributePanelProps, D6Attribu
         }
     }
 
-    private openModal(): void {
-        this.setState({modalIsOpen: true})
-    }
-
-    private closeModal(): void {
-        this.setState({modalIsOpen: false})
-    }
-
-    private saveDataFromModal(): void {
+    protected saveDataFromModal(): void {
 
     }
 
@@ -52,10 +44,10 @@ export class D6AttributePanel extends Component<D6AttributePanelProps, D6Attribu
                         ))}
                     </ul>
                 </div>
-                <Modal title={this.props.label} show={this.state.modalIsOpen}
-                       onRequestClose={() => this.closeModal()} onRequestSave={this.saveDataFromModal}>
+                <ModalForm title={this.props.label} show={this.state.modalIsOpen}
+                           onRequestClose={() => this.closeModal()} onSubmit={this.saveDataFromModal}>
                     <p>Body comes here</p>
-                </Modal>
+                </ModalForm>
             </>
         );
     }

@@ -6,15 +6,28 @@ import {SW2E_TEMPLATE} from "../asset/Sw2eTemplate";
 
 export class CharacterSheet extends Component<any, any> {
 
+    changeMetaData() {
+
+    }
+
+    changeAttributeData() {
+
+    }
+
+    componentDidMount() {
+        document.title = ADI_GALLIA.name;
+    }
+
     render() {
         return (
             <>
-                <Navbar title={ADI_GALLIA.name}/>
+                <Navbar title={ADI_GALLIA.name} onChange={() => this.changeMetaData()} />
                 <div className="container-fluid">
                     <div className="row">
                         {SW2E_TEMPLATE.attributes.map(attr => (
                             <div className="col-md-6 col-xl-4" key={"attr-" + attr.id}>
-                                <D6AttributePanel attribute={ADI_GALLIA.attributes[attr.id]} label={attr.label}/>
+                                <D6AttributePanel attribute={ADI_GALLIA.attributes[attr.id]} label={attr.label}
+                                                  onChange={() => this.changeAttributeData()}/>
                             </div>
                         ))}
                     </div>

@@ -7,20 +7,20 @@ enum ModalStatus {
     TRANSIT_OUT
 }
 
-interface ModalProps {
+interface ModalFormProps {
     title?: string;
     show: boolean;
     onRequestClose: () => void;
-    onRequestSave: () => void;
+    onSubmit: () => void;
 }
 
-interface ModalState {
+interface ModalFormState {
     status: ModalStatus;
 }
 
-export class Modal extends Component<ModalProps, ModalState> {
+export class ModalForm extends Component<ModalFormProps, ModalFormState> {
 
-    constructor(props: ModalProps) {
+    constructor(props: ModalFormProps) {
         super(props);
         this.state = {
             status: this.props.show ? ModalStatus.OPEN : ModalStatus.CLOSED
@@ -41,7 +41,7 @@ export class Modal extends Component<ModalProps, ModalState> {
         return { display: "none" }
     }
 
-    componentDidUpdate(prevProps: Readonly<ModalProps>, prevState: Readonly<ModalState>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<ModalFormProps>, prevState: Readonly<ModalFormState>, snapshot?: any) {
         if (prevProps.show !== this.props.show) {
             if (this.props.show) {
                 setTimeout(() => this.showModal(), 25)
@@ -81,7 +81,7 @@ export class Modal extends Component<ModalProps, ModalState> {
                                     <button type="button" className="btn btn-secondary"
                                             data-bs-dismiss="modal" onClick={this.props.onRequestClose}>Close
                                     </button>
-                                    <button type="button" className="btn btn-primary" onClick={this.props.onRequestSave}>Save changes</button>
+                                    <button type="button" className="btn btn-primary" onClick={this.props.onSubmit}>Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -89,6 +89,5 @@ export class Modal extends Component<ModalProps, ModalState> {
                 </>
             )}
         </>);
-
     }
 }
