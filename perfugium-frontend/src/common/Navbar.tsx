@@ -1,11 +1,11 @@
 import {ModalForm} from "./ModalForm";
-import {ComponentWithModalForm, ComponentWithModalFormProps, ComponentWithodalFormState} from "./ComponentWithModalForm";
+import {ComponentWithModalForm, ComponentWithModalFormProps, ComponentWithModalFormState} from "./ComponentWithModalForm";
 
 interface NavbarProps extends ComponentWithModalFormProps {
     title: string;
 }
 
-interface NavbarState extends ComponentWithodalFormState {
+interface NavbarState extends ComponentWithModalFormState {
     modalIsOpen: boolean;
 }
 

@@ -1,14 +1,14 @@
 import {D6Attribute} from "../interface/D6Character";
 import {ModalForm} from "./ModalForm";
 import {D6PipComponent} from "./D6PipComponent";
-import {ComponentWithModalForm, ComponentWithModalFormProps, ComponentWithodalFormState} from "./ComponentWithModalForm";
+import {ComponentWithModalForm, ComponentWithModalFormProps, ComponentWithModalFormState} from "./ComponentWithModalForm";
 
 interface D6AttributePanelProps extends ComponentWithModalFormProps {
     attribute: D6Attribute;
     label: string;
 }
 
-interface D6AttributeState extends ComponentWithodalFormState {
+interface D6AttributeState extends ComponentWithModalFormState {
     modalIsOpen: boolean;
 }
 

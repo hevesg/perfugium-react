@@ -25,7 +25,7 @@ export class CharacterSheet extends Component<any, any> {
                 <div className="container-fluid">
                     <div className="row">
                         {SW2E_TEMPLATE.attributes.map(attr => (
-                            <div className="col-md-6 col-xl-4" key={"attr-" + attr.id}>
+                            <div className="col-md-6 col-lg-4" key={"attr-" + attr.id}>
                                 <D6AttributePanel attribute={ADI_GALLIA.attributes[attr.id]} label={attr.label}
                                                   onChange={() => this.changeAttributeData()}/>
                             </div>

@@ -4,13 +4,13 @@ export interface ComponentWithModalFormProps {
     onChange: () => void;
 }
 
-export interface ComponentWithodalFormState {
+export interface ComponentWithModalFormState {
     modalIsOpen: boolean;
 }
 
 export abstract class ComponentWithModalForm<
     P extends ComponentWithModalFormProps,
-    S extends ComponentWithodalFormState
+    S extends ComponentWithModalFormState
     > extends Component<P, S> {
 
     protected constructor(props: P) {
