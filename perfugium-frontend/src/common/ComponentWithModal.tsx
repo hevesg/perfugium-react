@@ -1,16 +1,16 @@
 import {Component} from "react";
 
-export interface ComponentWithModalFormProps {
+export interface ComponentWithModalProps {
     onChange: () => void;
 }
 
-export interface ComponentWithModalFormState {
+export interface ComponentWithModalState {
     modalIsOpen: boolean;
 }
 
-export abstract class ComponentWithModalForm<
-    P extends ComponentWithModalFormProps,
-    S extends ComponentWithModalFormState
+export abstract class ComponentWithModal<
+    P extends ComponentWithModalProps,
+    S extends ComponentWithModalState
     > extends Component<P, S> {
 
     protected constructor(props: P) {

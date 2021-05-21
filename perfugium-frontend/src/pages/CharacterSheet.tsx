@@ -24,13 +24,18 @@ export class CharacterSheet extends Component<any, any> {
                 <Navbar title={ADI_GALLIA.name} onChange={() => this.changeMetaData()} />
                 <div className="container-fluid">
                     <div className="row">
-                        {SW2E_TEMPLATE.attributes.map(attr => (
-                            <div className="col-md-6 col-lg-4" key={"attr-" + attr.id}>
-                                <D6AttributePanel attribute={ADI_GALLIA.attributes[attr.id]} label={attr.label}
-                                                  onChange={() => this.changeAttributeData()}/>
+                        <div className="col-xxl-9">
+                            <div className="row">
+                                {SW2E_TEMPLATE.attributes.map(attr => (
+                                    <div className="col-sm-6 col-lg-4" key={"attr-" + attr.id}>
+                                        <D6AttributePanel attribute={ADI_GALLIA.attributes[attr.id]} label={attr.label}
+                                                          onChange={() => this.changeAttributeData()}/>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
+
                 </div>
             </>
         );

@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 
 enum ModalStatus {
     CLOSED,
@@ -18,7 +18,7 @@ interface ModalFormState {
     status: ModalStatus;
 }
 
-export class ModalForm extends Component<ModalFormProps, ModalFormState> {
+export class Modal extends Component<ModalFormProps, ModalFormState> {
 
     constructor(props: ModalFormProps) {
         super(props);
@@ -36,9 +36,9 @@ export class ModalForm extends Component<ModalFormProps, ModalFormState> {
 
     public get modalStyle(): any {
         if (this.state.status !== ModalStatus.CLOSED) {
-            return { display: "block" };
+            return {display: "block"};
         }
-        return { display: "none" }
+        return {display: "none"}
     }
 
     componentDidUpdate(prevProps: Readonly<ModalFormProps>, prevState: Readonly<ModalFormState>, snapshot?: any) {
@@ -54,34 +54,28 @@ export class ModalForm extends Component<ModalFormProps, ModalFormState> {
     }
 
     private showModal() {
-        this.setState({ status: ModalStatus.OPEN })
+        this.setState({status: ModalStatus.OPEN})
     }
 
     private hideModal() {
-        this.setState({ status: ModalStatus.CLOSED })
+        this.setState({status: ModalStatus.CLOSED})
     }
 
     render() {
         return (<>
             {this.state.status > ModalStatus.CLOSED && (
                 <>
-                    <div className={`modal-backdrop fade ${this.modalClass}`} />
+                    <div className={`modal-backdrop fade ${this.modalClass}`}/>
                     <div className={`modal fade ${this.modalClass}`} style={this.modalStyle} tabIndex={-1}>
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
                                     <h5 className="modal-title">{this.props.title}</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close" onClick={this.props.onRequestClose}/>
+                                            aria-label="Close" onClick={() => this.props.onRequestClose()}/>
                                 </div>
                                 <div className="modal-body">
                                     {this.props.children}
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary"
-                                            data-bs-dismiss="modal" onClick={this.props.onRequestClose}>Close
-                                    </button>
-                                    <button type="button" className="btn btn-primary" onClick={this.props.onSubmit}>Save changes</button>
                                 </div>
                             </div>
                         </div>
