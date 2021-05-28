@@ -4,6 +4,10 @@ interface D6PipProps {
     value: number
 }
 
+interface D6PipState {
+    value: number
+}
+
 export class D6Pip {
     private readonly _dice: number;
     private readonly _pips: number;
@@ -32,27 +36,17 @@ export class D6Pip {
     }
 }
 
-export class D6PipComponent extends Component<D6PipProps> {
-
-    private pip: D6Pip;
-
-    constructor(props: D6PipProps) {
-        super(props);
-        this.pip = D6Pip.of(this.props.value);
-    }
-
-    componentDidUpdate(prevProps: Readonly<D6PipProps>, prevState: Readonly<{}>, snapshot?: any) {
-        this.pip = D6Pip.of(this.props.value);
-    }
+export class D6PipComponent extends Component<D6PipProps, D6PipState> {
 
     render() {
+        const pip: D6Pip = D6Pip.of(this.props.value);
         return (<span>
-            <span>{this.pip.dice}</span>
+            <span>{pip.dice}</span>
             <span>D</span>
-            {this.pip.pips > 0 && (
+            {pip.pips > 0 && (
                 <>
                     <span>+</span>
-                    <span>{ this.pip.pips }</span>
+                    <span>{ pip.pips }</span>
                 </>
             )}
         </span>);

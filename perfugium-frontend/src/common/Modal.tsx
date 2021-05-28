@@ -11,7 +11,6 @@ interface ModalFormProps {
     title?: string;
     show: boolean;
     onRequestClose: () => void;
-    onSubmit: () => void;
 }
 
 interface ModalFormState {
@@ -27,14 +26,14 @@ export class Modal extends Component<ModalFormProps, ModalFormState> {
         }
     }
 
-    public get modalClass(): string {
+    private get modalClass(): string {
         if (this.state.status === ModalStatus.OPEN) {
             return "show";
         }
         return ""
     }
 
-    public get modalStyle(): any {
+    private get modalStyle(): any {
         if (this.state.status !== ModalStatus.CLOSED) {
             return {display: "block"};
         }

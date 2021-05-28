@@ -6,7 +6,8 @@ import {Formik} from "formik";
 import React from "react";
 
 interface NavbarProps extends ComponentWithModalProps {
-    title: string;
+    name: string;
+    description: string;
 }
 
 interface NavbarState extends ComponentWithModalState {
@@ -22,23 +23,19 @@ export class Navbar extends ComponentWithModal<NavbarProps, NavbarState> {
         }
     }
 
-    protected saveDataFromModal(): void {
-
-    }
-
     render() {
         return (<>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <button className="btn btn-link navbar-brand"
-                            onClick={() => this.openModal()}>{this.props.title}</button>
+                            onClick={() => this.openModal()}>{this.props.name}</button>
                 </div>
             </nav>
             <Modal title="General data" show={this.state.modalIsOpen}
-                   onRequestClose={() => this.closeModal()} onSubmit={this.saveDataFromModal}>
+                   onRequestClose={() => this.closeModal()}>
                 <Formik
                     validateOnMount={true}
-                    initialValues={{name: this.props.title, description: ''}}
+                    initialValues={{name: this.props.name, description: this.props.description}}
                     validationSchema={Yup.object({
                         name: Yup.string()
                             .max(32, 'Must be 32 characters or less')
@@ -47,10 +44,7 @@ export class Navbar extends ComponentWithModal<NavbarProps, NavbarState> {
                             .max(255, 'Must be 255 characters or less')
                             .required('Required')
                     })}
-                    onSubmit={(values, {setSubmitting}) => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(true);
-                    }}
+                    onSubmit={(values) => this.saveData(values)}
                 >
                     {formik => (
                         <form onSubmit={formik.handleSubmit}>

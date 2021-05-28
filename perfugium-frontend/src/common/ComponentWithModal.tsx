@@ -1,7 +1,7 @@
 import {Component} from "react";
 
 export interface ComponentWithModalProps {
-    onChange: () => void;
+    onSave: (data: any) => void;
 }
 
 export interface ComponentWithModalState {
@@ -25,5 +25,8 @@ export abstract class ComponentWithModal<
         this.setState(Object.assign({}, this.state, {modalIsOpen: false}));
     }
 
-    protected abstract saveDataFromModal(): void;
+    protected saveData(values: any) {
+        this.props.onSave(values);
+        this.closeModal();
+    }
 }

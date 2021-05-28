@@ -1,13 +1,10 @@
 import {D6Attribute} from "../interface/D6Character";
 import {Modal} from "./Modal";
 import {D6PipComponent} from "./D6PipComponent";
-import {
-    ComponentWithModal, ComponentWithModalProps, ComponentWithModalState
-} from "./ComponentWithModal";
-import * as Yup from "yup";
-import {FormGroup} from "../form/FormGroup";
+import {ComponentWithModal, ComponentWithModalProps, ComponentWithModalState} from "./ComponentWithModal";
 import {Formik} from "formik";
 import React from "react";
+import {D6PipStepper} from "./D6PipStepper";
 
 interface D6AttributePanelProps extends ComponentWithModalProps {
     attribute: D6Attribute;
@@ -51,17 +48,9 @@ export class D6AttributePanel extends ComponentWithModal<D6AttributePanelProps, 
                     </ul>
                 </div>
                 <Modal title={this.props.label} show={this.state.modalIsOpen}
-                       onRequestClose={() => this.closeModal()} onSubmit={this.saveDataFromModal}>
+                       onRequestClose={() => this.closeModal()}>
                     <Formik
-                        initialValues={{firstName: '', lastName: ''}}
-                        validationSchema={Yup.object({
-                            firstName: Yup.string()
-                                .max(15, 'Must be 15 characters or less')
-                                .required('Required'),
-                            lastName: Yup.string()
-                                .max(20, 'Must be 20 characters or less')
-                                .required('Required')
-                        })}
+                        initialValues={this.props.attribute}
                         onSubmit={(values, {setSubmitting}) => {
                             setTimeout(() => {
                                 alert(JSON.stringify(values, null, 2));
@@ -71,23 +60,11 @@ export class D6AttributePanel extends ComponentWithModal<D6AttributePanelProps, 
                     >
                         {formik => (
                             <form onSubmit={formik.handleSubmit}>
-                                <div>
-                                    <FormGroup name="firstName" id="firstName"
-                                               label="First Name" type="text"
-                                               placeholder="" formik={formik}/>
-                                    {formik.touched.firstName && formik.errors.firstName ? (
-                                        <div>{formik.errors.firstName}</div>
-                                    ) : null}
-
-                                    <label htmlFor="lastName">Last Name</label>
-                                    <input
-                                        id="lastName"
-                                        type="text"
-                                        {...formik.getFieldProps('lastName')}
-                                    />
-                                    {formik.touched.lastName && formik.errors.lastName ? (
-                                        <div>{formik.errors.lastName}</div>
-                                    ) : null}
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <span>Attribute value</span>
+                                    <D6PipStepper onChange={formik.handleChange}
+                                                  value={formik.values.value}
+                                                  name="value"/>
                                 </div>
                                 <div>
                                     <button type="button" className="btn btn-secondary"
