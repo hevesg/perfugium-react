@@ -66,8 +66,14 @@ export class D6PipStepper extends Component<D6PipProps, D6PipState> {
                     <D6PipComponent value={this.state.value}/>
                 </span>
                 <span className="btn-group">
-                    <button type="button" className="btn btn-secondary" onClick={() => this.decrease()}>-</button>
-                    <button type="button" className="btn btn-secondary" onClick={() => this.increase()}>+</button>
+                    <button type="button"
+                            disabled={!(this.state.value > this.props.min!)}
+                            className="btn btn-secondary"
+                            onClick={() => this.decrease()}>-</button>
+                    <button type="button"
+                            disabled={!(this.state.value < this.props.max!)}
+                            className="btn btn-secondary"
+                            onClick={() => this.increase()}>+</button>
                 </span>
             </span>
         )

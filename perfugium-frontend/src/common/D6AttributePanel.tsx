@@ -60,12 +60,29 @@ export class D6AttributePanel extends ComponentWithModal<D6AttributePanelProps, 
                     >
                         {formik => (
                             <form onSubmit={formik.handleSubmit}>
-                                <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex justify-content-between align-items-center mb-3">
                                     <span>Attribute value</span>
                                     <D6PipStepper onChange={formik.handleChange}
                                                   value={formik.values.value}
                                                   name="value"/>
                                 </div>
+                                <ul className="list-unstyled">
+                                    {formik.values.skills.map((skill, index) => (
+                                        <li key={this.props.label + "-skill-" + index}
+                                            className="d-flex justify-content-between mb-3">
+                                            <div className="w-50">
+                                                <input type="text"
+                                                       name={`skills[${index}].name`}
+                                                       value={formik.values.skills[index].name}
+                                                       onChange={formik.handleChange} className="form-control"/>
+                                            </div>
+                                            <D6PipStepper onChange={formik.handleChange}
+                                                          value={formik.values.skills[index].value}
+                                                          name={`skills[${index}].value`} min={formik.values.value}/>
+                                        </li>
+                                    ))}
+                                </ul>
+
                                 <div>
                                     <button type="button" className="btn btn-secondary"
                                             data-bs-dismiss="modal" onClick={() => this.closeModal()}>Close
